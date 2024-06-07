@@ -42,6 +42,9 @@ export const useFilesStore = defineStore({
       return translation.translate(msg, this.language)
     },
     async getFiles(payload) {
+			if (!payload){
+				payload = this.filesRetrievalMode
+			}
       let files = await fileService.getFiles(payload)
       this.setLastSyncedDate(new Date())
       this.setFiles(files)
