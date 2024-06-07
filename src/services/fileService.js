@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   apiClient: axios.create({
-    baseURL: 'http://localhost:3010/',
+    baseURL: 'https://nodejs-astratech.onrender.com/',
     withCredentials: false,
     headers: {
       Accept: 'application/json',

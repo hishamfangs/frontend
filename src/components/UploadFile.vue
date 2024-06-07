@@ -28,6 +28,7 @@ export default {
   },
   watch: {
     uploadStatus(val) {
+      debugger
       // If the files are uploaded Successfully, remove the selected files from the upload component.
       if (val == STATUS.SUCCESS) {
         this.statusMessage = ''
@@ -175,45 +176,51 @@ export default {
 </script>
 
 <template>
-  <div class="upload-container">
-    <div class="body">
-      <div class="files-container">
-        <div
-          class="file-uploader"
-          :class="draggedOver"
-          :ondrop="dropHandler"
-          :ondragover="dragHandler"
-          :ondragleave="dragOutHandler"
-          :ondragend="dragOutHandler"
-          @click="simulateClickFileUpload"
-        >
-          <span v-html="this.translate('Click to browse or <br />drag and drop your files')"></span>
-          <input
-            v-on:change="handleFileUpload"
-            type="file"
-            ref="fileButton"
-            multiple
-            style="display: none"
-          />
-        </div>
-      </div>
-      <ListFiles
-        v-if="selectedFiles.length"
-        :files="filesForListComponent"
-        :loadStatus="uploadStatus"
-        :viewAllUploads="false"
-        :remove="true"
-        :update="false"
-        :translate="translate"
-        @removeFile="removeFile"
-      />
+  <div class="upload-wrapper">
+    <div v-if="uploadStatus == STATUS.PENDING" class="loading">
+      {{ this.translate('loading') }}...
     </div>
-  </div>
-  <div v-if="statusMessage" class="footer">
-    <span class="statusMessage" v-html="statusMessage"></span>
-    <button class="submitUpload primary" @click="submitUpload" v-if="selectedFiles.length">
-      {{ this.translate('Submit') }}
-    </button>
+    <div class="upload-container">
+      <div class="body">
+        <div class="files-container">
+          <div
+            class="file-uploader"
+            :class="draggedOver"
+            :ondrop="dropHandler"
+            :ondragover="dragHandler"
+            :ondragleave="dragOutHandler"
+            :ondragend="dragOutHandler"
+            @click="simulateClickFileUpload"
+          >
+            <span
+              v-html="this.translate('Click to browse or <br />drag and drop your files')"
+            ></span>
+            <input
+              v-on:change="handleFileUpload"
+              type="file"
+              ref="fileButton"
+              multiple
+              style="display: none"
+            />
+          </div>
+        </div>
+        <ListFiles
+          v-if="selectedFiles.length"
+          :files="filesForListComponent"
+          :viewAllUploads="false"
+          :remove="true"
+          :update="false"
+          :translate="translate"
+          @removeFile="removeFile"
+        />
+      </div>
+    </div>
+    <div v-if="statusMessage" class="footer">
+      <span class="statusMessage" v-html="statusMessage"></span>
+      <button class="submitUpload primary" @click="submitUpload" v-if="selectedFiles.length">
+        {{ this.translate('Submit') }}
+      </button>
+    </div>
   </div>
 </template>
 

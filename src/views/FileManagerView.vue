@@ -53,6 +53,7 @@ export default {
     // Upload Files
     async uploadFiles(files) {
       try {
+        this.uploadStatus = STATUS.PENDING
         let res = await this.filesStore.uploadFiles(files)
         this.uploadStatus = STATUS.SUCCESS
         this.switchSection(SECTION.RECENT)
@@ -64,6 +65,7 @@ export default {
     },
     async removeFile(id) {
       try {
+        this.loadStatus = STATUS.PENDING
         let res = await this.filesStore.removeFile(id)
         this.loadStatus = STATUS.SUCCESS
       } catch (err) {
@@ -73,6 +75,7 @@ export default {
     },
     async updateFile(id) {
       try {
+        this.loadStatus = STATUS.PENDING
         let res = await this.filesStore.updateFile(id)
         this.loadStatus = STATUS.SUCCESS
       } catch (err) {

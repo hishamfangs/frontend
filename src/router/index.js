@@ -28,6 +28,8 @@ router.beforeEach((to, from) => {
   if (to.name == 'Login' && filesStore.token) {
     return { name: 'File Manager' }
   }
+
+  // If the token is empty, redirect to the Login page.
   if (to.name != 'Login' && !filesStore.token) {
     return { name: 'Login' }
   }
