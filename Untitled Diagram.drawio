@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-06-07T00:34:10.737Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="ACrZUCHFG8yI1d3SFzLo" version="24.4.13" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-07T00:34:56.857Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="DUyth6y0mgxfif8EOFVk" version="24.4.13" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="1817" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -83,10 +83,10 @@
           <mxGeometry x="-335" y="335" width="60" height="80" as="geometry" />
         </mxCell>
         <mxCell id="HFVeS3BLLz6tbZfoytvX-9" value="Pinia Store" style="swimlane;fontStyle=1;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=29;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="50" y="110" width="140" height="200" as="geometry" />
+          <mxGeometry x="50" y="110" width="140" height="230" as="geometry" />
         </mxCell>
-        <mxCell id="HFVeS3BLLz6tbZfoytvX-10" value="&lt;b&gt;getters:&lt;/b&gt;&lt;br&gt;files&lt;br&gt;uploadedFiles&lt;br&gt;lastSyncedDate&lt;br&gt;language&lt;br&gt;&lt;br&gt;&lt;b&gt;actions:&lt;/b&gt;&lt;br&gt;async getFiles()&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;async&amp;nbsp;uploadFiles()&lt;/span&gt;&lt;br&gt;async&amp;nbsp;updateFile()&lt;br&gt;async removeFile()&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="HFVeS3BLLz6tbZfoytvX-9">
-          <mxGeometry y="29" width="140" height="171" as="geometry" />
+        <mxCell id="HFVeS3BLLz6tbZfoytvX-10" value="&lt;b&gt;getters:&lt;/b&gt;&lt;br&gt;files&lt;br&gt;uploadedFiles&lt;br&gt;lastSyncedDate&lt;br&gt;language&lt;br&gt;&lt;br&gt;&lt;b&gt;actions:&lt;/b&gt;&lt;br&gt;async getFiles()&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;async&amp;nbsp;uploadFiles()&lt;/span&gt;&lt;br&gt;async&amp;nbsp;updateFile()&lt;br&gt;async removeFile()&lt;div&gt;setLanguage(lang)&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;" vertex="1" parent="HFVeS3BLLz6tbZfoytvX-9">
+          <mxGeometry y="29" width="140" height="201" as="geometry" />
         </mxCell>
         <mxCell id="HFVeS3BLLz6tbZfoytvX-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HFVeS3BLLz6tbZfoytvX-11" target="HFVeS3BLLz6tbZfoytvX-9">
           <mxGeometry relative="1" as="geometry" />
