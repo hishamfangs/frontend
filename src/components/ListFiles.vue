@@ -31,7 +31,8 @@ export default {
     lastSyncedDate: Date,
     viewAllUploads: Boolean,
     remove: Boolean,
-    update: Boolean
+    update: Boolean,
+    translate: Function
   },
   watch: {
     lastSyncedDate() {
@@ -42,9 +43,9 @@ export default {
     getFileslabel() {
       console.log(this.filesRetrievalMode)
       if (this.filesRetrievalMode == FILES_RETRIEVAL_MODE.RECENT) {
-        return 'View all uploads'
+        return this.translate('View all uploads')
       } else {
-        return 'View recent'
+        return this.translate('View recent')
       }
     },
     lastSynced() {
@@ -52,15 +53,15 @@ export default {
         // minutes
         let minutes = Math.floor(this.syncedSeconds / 60)
         if (minutes == 1) {
-          return minutes + ' minute'
+          return minutes + ' ' + this.translate('minute')
         }
-        return minutes + ' minutes'
+        return minutes + ' ' + this.translate('minutes')
       } else {
         // seconds
         if (this.syncedSeconds == 1) {
-          return this.syncedSeconds + ' second'
+          return this.syncedSeconds + ' ' + this.translate('second')
         }
-        return this.syncedSeconds + ' seconds'
+        return this.syncedSeconds + ' ' + this.translate('seconds')
       }
     }
   },
@@ -119,19 +120,19 @@ export default {
       }
       // Return Seconds
       if (timeDifference / 1000 / 60 < 1) {
-        lastUpdatedMsg = `${Math.floor(timeDifference / 1000)}s ago`
+        lastUpdatedMsg = `${Math.floor(timeDifference / 1000)}s ${this.translate('ago')}`
       }
       // Return Minutes
       if (timeDifference / 1000 / 60 >= 1) {
-        lastUpdatedMsg = `${Math.floor(timeDifference / 1000 / 60)}m ago`
+        lastUpdatedMsg = `${Math.floor(timeDifference / 1000 / 60)}m ${this.translate('ago')}`
       }
       // Return Hours
       if (timeDifference / 1000 / 60 >= 60) {
-        lastUpdatedMsg = `${Math.floor(timeDifference / 1000 / 60 / 60)} hours ago`
+        lastUpdatedMsg = `${Math.floor(timeDifference / 1000 / 60 / 60)} ${this.translate('hours')} ${this.translate('ago')}`
       }
       // Return Days
       if (timeDifference / 1000 / 60 / 60 >= 24) {
-        lastUpdatedMsg = `${Math.floor(timeDifference / 1000 / 60 / 60 / 24)} days ago`
+        lastUpdatedMsg = `${Math.floor(timeDifference / 1000 / 60 / 60 / 24)} ${this.translate('days')} ${this.translate('ago')}`
       }
       return lastUpdatedMsg
     },
@@ -174,7 +175,9 @@ export default {
   <div class="list-container">
     <div class="body">
       <div class="files-container">
-        <div v-if="loadStatus == STATUS.PENDING" class="loader">loading...</div>
+        <div v-if="loadStatus == STATUS.PENDING" class="loader">
+          {{ this.translate('loading') }}...
+        </div>
         <div class="file-container" v-for="file in files" :key="file.id">
           <div class="details">
             <span class="icon"><img :src="fillIcon(file)" /></span>
@@ -188,10 +191,10 @@ export default {
             <img src="/icons/elipsis.svg" />
             <ul class="drop-menu" :class="[this.shownMenu == file.id ? '' : 'hide']">
               <li @click.stop="updateFile(file.id)" v-if="update === true">
-                <img src="/icons/edit.png" /><span>Update File</span>
+                <img src="/icons/edit.png" /><span>{{ this.translate('Update File') }}</span>
               </li>
               <li @click.stop="removeFile(file.id)" v-if="remove === true">
-                <img src="/icons/remove.png" /><span>Remove File</span>
+                <img src="/icons/remove.png" /><span>{{ this.translate('Remove File') }}</span>
               </li>
             </ul>
           </div>
@@ -204,14 +207,17 @@ export default {
   </div>
   <div class="footer" v-if="lastSyncedDate">
     <span
-      ><i></i> Last Synced: {{ lastSynced }} ago
-      <span class="refreshed-notice">(refreshed every 10 seconds / 1 minute)</span></span
+      ><i></i> {{ this.translate('Last Synced: ') + lastSynced + ' ' + this.translate('ago') }}
+      <span class="refreshed-notice">{{
+        translate('(refreshed every 10 seconds / 1 minute)')
+      }}</span></span
     >
   </div>
 </template>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
 
 .files-container {
   font-family: Inter;
@@ -226,6 +232,9 @@ export default {
   padding: 16px;
   position: relative;
   min-height: 200px;
+}
+.ar_AE .files-container {
+  font-family: 'Noto Kufi Arabic', sans-serif;
 }
 .file-container {
   height: 51px;
@@ -287,7 +296,9 @@ export default {
   font-size: 0.8em;
   line-height: 14px;
 }
-
+.ar_AE .last-updated {
+  text-align: right;
+}
 .view-all-container {
   display: flex;
   justify-content: center;
@@ -327,6 +338,11 @@ export default {
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   font-size: 10px;
   list-style: none;
+}
+/** Arabic Style */
+.ar_AE .drop-menu {
+  right: auto;
+  left: 20px;
 }
 .drop-menu > li {
   padding: 2px 10px;

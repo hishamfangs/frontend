@@ -24,7 +24,8 @@ export default {
       loadStatus: STATUS.IDLE,
       uploadStatus: STATUS.IDLE,
       failedMessage: '',
-      lastSyncedDate: new Date()
+      lastSyncedDate: new Date(),
+      language: ''
     }
   },
   methods: {
@@ -35,7 +36,12 @@ export default {
     switchSectionHandler(event) {
       this.switchSection(event.target.name)
     },
-
+    setLanguage(lang) {
+      //if (this.filesStore.language == lang) {
+      document.documentElement.classList.remove(...document.documentElement.classList)
+      document.documentElement.classList.add(lang)
+      this.filesStore.setLanguage(lang)
+    },
     // Retrieve the files from the REST API
     async getFiles(mode) {
       this.loadStatus = STATUS.PENDING
@@ -83,6 +89,7 @@ export default {
   },
   async mounted() {
     //const filesStore = useFilesStore();
+    this.setLanguage('en_US')
     await this.getFiles()
   }
 }
@@ -90,6 +97,26 @@ export default {
 
 <template>
   <main>
+    <div class="language-selector">
+      <div class="button-group">
+        <button
+          class="english"
+          name="english"
+          :class="[filesStore.language == 'en_US' ? 'active' : '']"
+          @click="setLanguage('en_US')"
+        >
+          {{ filesStore.translate('En') }}
+        </button>
+        <button
+          class="arabic"
+          name="arabic"
+          :class="[filesStore.language == 'ar_AE' ? 'active' : '']"
+          @click="setLanguage('ar_AE')"
+        >
+          {{ filesStore.translate('Ar') }}
+        </button>
+      </div>
+    </div>
     <div class="container">
       <div class="header">
         <div class="button-group">
@@ -99,7 +126,7 @@ export default {
             :class="[selectedSection == SECTION?.NEW_UPLOAD ? 'active' : '']"
             @click="switchSectionHandler"
           >
-            New Upload
+            {{ filesStore.translate('New Upload') }}
           </button>
           <button
             class="recent"
@@ -107,7 +134,7 @@ export default {
             :class="[selectedSection == SECTION?.RECENT ? 'active' : '']"
             @click="switchSectionHandler"
           >
-            Recent
+            {{ filesStore.translate('Recent') }}
           </button>
         </div>
         <div class="settings">
@@ -116,7 +143,11 @@ export default {
       </div>
       <div class="body">
         <div :class="[this.selectedSection == SECTION.NEW_UPLOAD ? '' : 'hide']">
-          <UploadFile @uploadFiles="uploadFiles" :uploadStatus="uploadStatus" />
+          <UploadFile
+            @uploadFiles="uploadFiles"
+            :uploadStatus="uploadStatus"
+            :translate="filesStore.translate"
+          />
         </div>
         <div :class="[this.selectedSection == SECTION.RECENT ? '' : 'hide']">
           <ListFiles
@@ -126,6 +157,7 @@ export default {
             :viewAllUploads="true"
             :remove="true"
             :update="true"
+            :translate="filesStore.translate"
             @getFiles="getFiles"
             @removeFile="removeFile"
             @updateFile="updateFile"
@@ -137,6 +169,8 @@ export default {
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+
 :root {
   --primary-text: #242634;
   --primary-border: #ebeff2;
@@ -146,6 +180,7 @@ export default {
   --active: #4353ff;
   --secondary-border: #e2e6ea;
 }
+
 html,
 body,
 #app {
@@ -153,9 +188,22 @@ body,
   width: 100%;
   height: 100%;
 }
+/*** Arabic RTL *****/
+html.ar_AE,
+.ar_AE body,
+.ar_AE #app {
+  direction: rtl;
+}
+
 body {
   background: var(--background);
   color: var(--primary-text);
+  font-family: Tahoma, Helvetica, sans-serif;
+}
+.ar_AE body,
+.ar_AE button,
+.ar_AE * {
+  font-family: 'Noto Kufi Arabic', sans-serif;
 }
 
 html,
@@ -168,7 +216,7 @@ span {
 
 main {
   width: 100%;
-  font-family: Tahoma, Helvetica, sans-serif;
+
   font-size: 14px;
   padding: 40px;
   max-width: 80%;
@@ -205,6 +253,7 @@ main {
   box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
   background-color: #f7f9fb;
 }
+
 button {
   cursor: pointer;
   width: auto;
@@ -254,6 +303,10 @@ button.primary:hover {
   right: 0px;
   margin: 20px;
 }
+.ar_AE .settings {
+  right: auto;
+  left: 0px;
+}
 img.Icon-Settings {
   width: 16px;
   height: 16px;
@@ -274,7 +327,16 @@ img.Icon-Settings {
 .hide {
   display: none;
 }
+.language-selector {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
 
+.language-selector .button-group {
+  direction: ltr;
+}
 @media screen and (max-width: 1024px) {
   main {
     max-width: 100%;

@@ -30,7 +30,8 @@ export default {
     ListFiles
   },
   props: {
-    uploadStatus: String
+    uploadStatus: String,
+    translate: Function
   },
   computed: {
     // Generate a textual list of the allowed Item Types from allowedTypes
@@ -93,7 +94,11 @@ export default {
           })
         }
         this.statusMessage =
-          '<span style="color: green">' + this.selectedFiles.length + ' files selected.' + '</span>'
+          '<span style="color: green">' +
+          this.selectedFiles.length +
+          ' ' +
+          this.translate('files selected.') +
+          '</span>'
       } catch (err) {
         this.statusMessage = '<span style="color: red">' + err + '</span>'
       }
@@ -101,9 +106,9 @@ export default {
     checkAllowedFileType(fileType) {
       if (!this.allowedTypes[fileType]) {
         throw (
-          'File type: ' +
+          this.translate('File type: ') +
           fileType +
-          ' is not allowed <br /> Allowed file types are: ' +
+          this.translate(' is not allowed <br /> Allowed file types are: ') +
           this.allowedFileTypes
         )
       }
@@ -128,7 +133,11 @@ export default {
           this.selectedFiles.push(file)
         })
         this.statusMessage =
-          '<span style="color: green">' + this.selectedFiles.length + ' files selected.' + '</span>'
+          '<span style="color: green">' +
+          this.selectedFiles.length +
+          ' ' +
+          this.translate('files selected.') +
+          '</span>'
       } catch (err) {
         this.statusMessage = '<span style="color: red">' + err + '</span>'
       }
@@ -145,12 +154,11 @@ export default {
     removeFile(id) {
       this.selectedFiles.splice(id, 1)
       this.statusMessage =
-        '<span style="color: green">' + this.selectedFiles.length + ' files selected.' + '</span>'
-      /* this.selectedFiles.forEach((item, i) => {
-        if (String(i).trim() == String(id).trim()) {
-          this.selectedFiles.splice(i, 1)
-        }
-      }) */
+        '<span style="color: green">' +
+        this.selectedFiles.length +
+        ' ' +
+        this.translate('files selected.') +
+        '</span>'
     }
   },
   mounted() {}
@@ -170,7 +178,7 @@ export default {
           :ondragend="dragOutHandler"
           @click="simulateClickFileUpload"
         >
-          <span>Click to browse or <br />drag and drop your files</span>
+          <span v-html="this.translate('Click to browse or <br />drag and drop your files')"></span>
           <input
             v-on:change="handleFileUpload"
             type="file"
@@ -187,17 +195,22 @@ export default {
         :viewAllUploads="false"
         :remove="true"
         :update="false"
+        :translate="translate"
         @removeFile="removeFile"
       />
     </div>
   </div>
   <div v-if="statusMessage" class="footer">
     <span class="statusMessage" v-html="statusMessage"></span>
-    <button class="submitUpload primary" @click="submitUpload">Submit</button>
+    <button class="submitUpload primary" @click="submitUpload">
+      {{ this.translate('Submit') }}
+    </button>
   </div>
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+
 @font-face {
   font-family: 'SF Pro Display';
   src: url('/fonts/SFProDisplay-BlackItalic.eot');
@@ -337,6 +350,9 @@ export default {
   padding: 16px;
   position: relative;
   background: var(--secondary-background);
+}
+.ar_AE .files-container {
+  font-family: 'Noto Kufi Arabic', sans-serif;
 }
 .file-uploader {
   min-height: 109px;

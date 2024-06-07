@@ -1,13 +1,15 @@
 //import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import fileService from '@/services/fileService'
+import translation from '@/translations'
 
 export const useFilesStore = defineStore({
   id: 'filesStore',
   state: () => ({
     _files: [],
     _uploadedFiles: [],
-    _lastSyncedDate: new Date()
+    _lastSyncedDate: new Date(),
+    _language: 'en_US'
   }),
   getters: {
     files: (state) => {
@@ -18,9 +20,18 @@ export const useFilesStore = defineStore({
     },
     lastSyncedDate: (state) => {
       return state._lastSyncedDate
+    },
+    language: (state) => {
+      return state._language
     }
   },
   actions: {
+    setLanguage(lang) {
+      this._language = lang
+    },
+    translate(msg) {
+      return translation.translate(msg, this.language)
+    },
     async getFiles(payload) {
       let files = await fileService.getFiles(payload)
       this.setLastSyncedDate(new Date())
