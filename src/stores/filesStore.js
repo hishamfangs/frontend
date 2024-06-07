@@ -9,7 +9,8 @@ export const useFilesStore = defineStore({
     _files: [],
     _uploadedFiles: [],
     _lastSyncedDate: new Date(),
-    _language: 'en_US'
+    _language: 'en_US',
+    _token: ''
   }),
   getters: {
     files: (state) => {
@@ -23,6 +24,9 @@ export const useFilesStore = defineStore({
     },
     language: (state) => {
       return state._language
+    },
+    token: (state) => {
+      return state._token
     }
   },
   actions: {
@@ -61,11 +65,27 @@ export const useFilesStore = defineStore({
         return err
       }
     },
+    async loginUser(username, password) {
+      try {
+        let res = await fileService.loginUser(username, password)
+        if (res) {
+          this.setToken(res.access_token)
+        } else {
+          this.setToken('')
+        }
+        return res
+      } catch (err) {
+        return err
+      }
+    },
     setFiles(payload) {
       this._files = payload
     },
     setLastSyncedDate(payload) {
       this._lastSyncedDate = payload
+    },
+    setToken(payload) {
+      this._token = payload
     }
   }
 })

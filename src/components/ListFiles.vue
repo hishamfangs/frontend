@@ -175,7 +175,7 @@ export default {
   <div class="list-container">
     <div class="body">
       <div class="files-container">
-        <div v-if="loadStatus == STATUS.PENDING" class="loader">
+        <div v-if="loadStatus == STATUS.PENDING" class="loading">
           {{ this.translate('loading') }}...
         </div>
         <div class="file-container" v-for="file in files" :key="file.id">
@@ -216,9 +216,6 @@ export default {
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
-
 .files-container {
   font-family: Inter;
   font-weight: 500;
@@ -233,7 +230,7 @@ export default {
   position: relative;
   min-height: 200px;
 }
-.ar_AE .files-container {
+[lang='ar_AE'] .files-container {
   font-family: 'Noto Kufi Arabic', sans-serif;
 }
 .file-container {
@@ -296,7 +293,7 @@ export default {
   font-size: 0.8em;
   line-height: 14px;
 }
-.ar_AE .last-updated {
+[lang='ar_AE'] .last-updated {
   text-align: right;
 }
 .view-all-container {
@@ -311,18 +308,7 @@ export default {
   border: 1px solid var(--button-border);
   border-radius: 40px;
 }
-.loader {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9;
-}
+
 .menu {
   padding: 6px;
   cursor: pointer;
@@ -340,7 +326,7 @@ export default {
   list-style: none;
 }
 /** Arabic Style */
-.ar_AE .drop-menu {
+[lang='ar_AE'] .drop-menu {
   right: auto;
   left: 20px;
 }

@@ -26,6 +26,15 @@ export default {
       /**** CONSTANTS *****/
     }
   },
+  watch: {
+    uploadStatus(val) {
+      // If the files are uploaded Successfully, remove the selected files from the upload component.
+      if (val == STATUS.SUCCESS) {
+        this.statusMessage = ''
+        this.selectedFiles = []
+      }
+    }
+  },
   components: {
     ListFiles
   },
@@ -202,141 +211,13 @@ export default {
   </div>
   <div v-if="statusMessage" class="footer">
     <span class="statusMessage" v-html="statusMessage"></span>
-    <button class="submitUpload primary" @click="submitUpload">
+    <button class="submitUpload primary" @click="submitUpload" v-if="selectedFiles.length">
       {{ this.translate('Submit') }}
     </button>
   </div>
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-BlackItalic.eot');
-  src:
-    url('/fonts/SFProDisplay-BlackItalic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-BlackItalic.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-BlackItalic.woff') format('woff'),
-    url('/fonts/SFProDisplay-BlackItalic.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-BlackItalic.svg#SFProDisplay-BlackItalic') format('svg');
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-Bold.eot');
-  src:
-    url('/fonts/SFProDisplay-Bold.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-Bold.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-Bold.woff') format('woff'),
-    url('/fonts/SFProDisplay-Bold.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-Bold.svg#SFProDisplay-Bold') format('svg');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-LightItalic.eot');
-  src:
-    url('/fonts/SFProDisplay-LightItalic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-LightItalic.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-LightItalic.woff') format('woff'),
-    url('/fonts/SFProDisplay-LightItalic.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-LightItalic.svg#SFProDisplay-LightItalic') format('svg');
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-HeavyItalic.eot');
-  src:
-    url('/fonts/SFProDisplay-HeavyItalic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-HeavyItalic.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-HeavyItalic.woff') format('woff'),
-    url('/fonts/SFProDisplay-HeavyItalic.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-HeavyItalic.svg#SFProDisplay-HeavyItalic') format('svg');
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-Regular.eot');
-  src:
-    url('/fonts/SFProDisplay-Regular.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-Regular.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-Regular.woff') format('woff'),
-    url('/fonts/SFProDisplay-Regular.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-Regular.svg#SFProDisplay-Regular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-Medium.eot');
-  src:
-    url('/fonts/SFProDisplay-Medium.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-Medium.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-Medium.woff') format('woff'),
-    url('/fonts/SFProDisplay-Medium.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-Medium.svg#SFProDisplay-Medium') format('svg');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-UltralightItalic.eot');
-  src:
-    url('/fonts/SFProDisplay-UltralightItalic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-UltralightItalic.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-UltralightItalic.woff') format('woff'),
-    url('/fonts/SFProDisplay-UltralightItalic.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-UltralightItalic.svg#SFProDisplay-UltralightItalic') format('svg');
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-ThinItalic.eot');
-  src:
-    url('/fonts/SFProDisplay-ThinItalic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-ThinItalic.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-ThinItalic.woff') format('woff'),
-    url('/fonts/SFProDisplay-ThinItalic.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-ThinItalic.svg#SFProDisplay-ThinItalic') format('svg');
-  font-weight: 100;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SF Pro Display';
-  src: url('/fonts/SFProDisplay-SemiboldItalic.eot');
-  src:
-    url('/fonts/SFProDisplay-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
-    url('/fonts/SFProDisplay-SemiboldItalic.woff2') format('woff2'),
-    url('/fonts/SFProDisplay-SemiboldItalic.woff') format('woff'),
-    url('/fonts/SFProDisplay-SemiboldItalic.ttf') format('truetype'),
-    url('/fonts/SFProDisplay-SemiboldItalic.svg#SFProDisplay-SemiboldItalic') format('svg');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-
 .files-container {
   font-family: 'SF Pro Display';
   font-weight: 200;
@@ -351,7 +232,7 @@ export default {
   position: relative;
   background: var(--secondary-background);
 }
-.ar_AE .files-container {
+[lang='ar_AE'] .files-container {
   font-family: 'Noto Kufi Arabic', sans-serif;
 }
 .file-uploader {

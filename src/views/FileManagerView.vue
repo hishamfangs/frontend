@@ -1,10 +1,10 @@
 <script>
-import ListFiles from './components/ListFiles.vue'
-import UploadFile from './components/UploadFile.vue'
-import { useFilesStore } from './stores/filesStore'
+import ListFiles from '../components/ListFiles.vue'
+import UploadFile from '../components/UploadFile.vue'
+import { useFilesStore } from '../stores/filesStore'
 
 /****** ENUM for Selected Section ******/
-import { SECTION, STATUS } from './Enums.js'
+import { SECTION, STATUS } from '../Enums.js'
 
 export default {
   components: {
@@ -24,8 +24,7 @@ export default {
       loadStatus: STATUS.IDLE,
       uploadStatus: STATUS.IDLE,
       failedMessage: '',
-      lastSyncedDate: new Date(),
-      language: ''
+      lastSyncedDate: new Date()
     }
   },
   methods: {
@@ -35,12 +34,6 @@ export default {
     },
     switchSectionHandler(event) {
       this.switchSection(event.target.name)
-    },
-    setLanguage(lang) {
-      //if (this.filesStore.language == lang) {
-      document.documentElement.classList.remove(...document.documentElement.classList)
-      document.documentElement.classList.add(lang)
-      this.filesStore.setLanguage(lang)
     },
     // Retrieve the files from the REST API
     async getFiles(mode) {
@@ -62,11 +55,12 @@ export default {
       try {
         let res = await this.filesStore.uploadFiles(files)
         this.uploadStatus = STATUS.SUCCESS
+        this.switchSection(SECTION.RECENT)
+        this.files
+        await this.getFiles()
       } catch (err) {
         this.uploadStatus = STATUS.FAILED
       }
-      this.switchSection(SECTION.RECENT)
-      await this.getFiles()
     },
     async removeFile(id) {
       try {
@@ -88,35 +82,14 @@ export default {
     }
   },
   async mounted() {
-    //const filesStore = useFilesStore();
-    this.setLanguage('en_US')
     await this.getFiles()
   }
 }
 </script>
 
 <template>
-  <main>
-    <div class="language-selector">
-      <div class="button-group">
-        <button
-          class="english"
-          name="english"
-          :class="[filesStore.language == 'en_US' ? 'active' : '']"
-          @click="setLanguage('en_US')"
-        >
-          {{ filesStore.translate('En') }}
-        </button>
-        <button
-          class="arabic"
-          name="arabic"
-          :class="[filesStore.language == 'ar_AE' ? 'active' : '']"
-          @click="setLanguage('ar_AE')"
-        >
-          {{ filesStore.translate('Ar') }}
-        </button>
-      </div>
-    </div>
+  <div class="file-manager">
+    <LanguageSelector />
     <div class="container">
       <div class="header">
         <div class="button-group">
@@ -165,62 +138,16 @@ export default {
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
-
-:root {
-  --primary-text: #242634;
-  --primary-border: #ebeff2;
-  --button-border: #cdd3d8;
-  --background: #f0f0f1;
-  --secondary-background: #f8f8f8;
-  --active: #4353ff;
-  --secondary-border: #e2e6ea;
-}
-
-html,
-body,
-#app {
-  margin: 0;
+<style scoped>
+.file-manager {
   width: 100%;
-  height: 100%;
-}
-/*** Arabic RTL *****/
-html.ar_AE,
-.ar_AE body,
-.ar_AE #app {
-  direction: rtl;
-}
-
-body {
-  background: var(--background);
-  color: var(--primary-text);
-  font-family: Tahoma, Helvetica, sans-serif;
-}
-.ar_AE body,
-.ar_AE button,
-.ar_AE * {
-  font-family: 'Noto Kufi Arabic', sans-serif;
-}
-
-html,
-body,
-*,
-div,
-span {
-  box-sizing: border-box;
-}
-
-main {
-  width: 100%;
-
   font-size: 14px;
   padding: 40px;
   max-width: 80%;
-  margin: auto;
+  margin: 0px auto;
 }
 .container {
   display: flex;
@@ -243,49 +170,6 @@ main {
   justify-content: center;
   border-bottom: 1px solid var(--primary-border);
 }
-.button-group {
-  width: auto;
-  height: 36px;
-  display: flex;
-  gap: 4px;
-  padding: 4px 5px;
-  border-radius: 40px;
-  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
-  background-color: #f7f9fb;
-}
-
-button {
-  cursor: pointer;
-  width: auto;
-  height: 28px;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 20px;
-  border-radius: 40px;
-  background-color: #f7f9fb;
-  color: var(--active);
-  border: 0px;
-  font-size: 12px;
-  font-weight: 600;
-}
-button.primary {
-  background: none;
-  border: 1px solid var(--active);
-  color: var(--active);
-}
-button.primary:hover {
-  background-color: var(--active);
-  color: white;
-}
-
-.active {
-  background-color: var(--active);
-  color: white;
-}
 
 .settings {
   width: 36px;
@@ -303,7 +187,7 @@ button.primary:hover {
   right: 0px;
   margin: 20px;
 }
-.ar_AE .settings {
+[lang='ar_AE'] .settings {
   right: auto;
   left: 0px;
 }
@@ -319,26 +203,9 @@ img.Icon-Settings {
   display: inline-block;
   margin-left: 20px;
 }
-.footer {
-  font-size: 12px;
-  background: #f7f9fb;
-  padding: 14px 20px;
-}
-.hide {
-  display: none;
-}
-.language-selector {
-  width: auto;
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-}
 
-.language-selector .button-group {
-  direction: ltr;
-}
 @media screen and (max-width: 1024px) {
-  main {
+  .file-manager {
     max-width: 100%;
   }
 }

@@ -1,19 +1,37 @@
 <script>
-import FileManager from './FileManager.vue'
+import LanguageSelector from '@/components/LanguageSelector.vue'
+import { useFilesStore } from '@/stores/filesStore'
+
 export default {
   components: {
-    FileManager
+    LanguageSelector
   },
   data() {
-    return {}
+    return {
+      filesStore: useFilesStore()
+    }
   },
-  methods: {},
+  methods: {
+    setLanguage(lang) {
+      this.filesStore.setLanguage(lang)
+    }
+  },
+  computed: {
+    language() {
+      return this.filesStore.language
+    }
+  },
   async mounted() {}
 }
 </script>
 
 <template>
-  <FileManager />
+  <LanguageSelector
+    :language="language"
+    :translate="this.filesStore.translate"
+    @setLanguage="setLanguage"
+  />
+  <router-view />
 </template>
 
 <style></style>

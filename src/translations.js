@@ -82,6 +82,30 @@ const translations = {
   ' is not allowed <br /> Allowed file types are: ': {
     ar_AE: 'غير مسموح به <br /> أنواع الملفات المسموح بها هي:نوع الملف:',
     en_US: ' is not allowed <br /> Allowed file types are: '
+  },
+  Login: {
+    ar_AE: 'تسجيل الدخول',
+    en_US: 'Login'
+  },
+  'Email or username': {
+    ar_AE: 'البريد الإلكتروني أو إسم المستخدم',
+    en_US: 'Email or username'
+  },
+  password: {
+    ar_AE: 'كلمة المرور',
+    en_US: 'password'
+  },
+  username: {
+    ar_AE: 'إسم المستخدم',
+    en_US: 'username'
+  },
+  'Login with the following credentials:': {
+    ar_AE: 'تسجيل الدخول باستخدام بيانات الاعتماد التالية:',
+    en_US: 'Login with the following credentials:'
+  },
+  'Incorrect Username or Password!': {
+    ar_AE: 'اسم المستخدم أو كلمة المرور غير صحيحة!',
+    en_US: 'Incorrect Username or Password!'
   }
 }
 

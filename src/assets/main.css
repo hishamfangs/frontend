@@ -1,0 +1,271 @@
+/***** 
+|** Fonts
+|********************/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-BlackItalic.eot');
+  src:
+    url('/fonts/SFProDisplay-BlackItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-BlackItalic.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-BlackItalic.woff') format('woff'),
+    url('/fonts/SFProDisplay-BlackItalic.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-BlackItalic.svg#SFProDisplay-BlackItalic') format('svg');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-Bold.eot');
+  src:
+    url('/fonts/SFProDisplay-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-Bold.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-Bold.woff') format('woff'),
+    url('/fonts/SFProDisplay-Bold.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-Bold.svg#SFProDisplay-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-LightItalic.eot');
+  src:
+    url('/fonts/SFProDisplay-LightItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-LightItalic.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-LightItalic.woff') format('woff'),
+    url('/fonts/SFProDisplay-LightItalic.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-LightItalic.svg#SFProDisplay-LightItalic') format('svg');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-HeavyItalic.eot');
+  src:
+    url('/fonts/SFProDisplay-HeavyItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-HeavyItalic.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-HeavyItalic.woff') format('woff'),
+    url('/fonts/SFProDisplay-HeavyItalic.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-HeavyItalic.svg#SFProDisplay-HeavyItalic') format('svg');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-Regular.eot');
+  src:
+    url('/fonts/SFProDisplay-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-Regular.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-Regular.woff') format('woff'),
+    url('/fonts/SFProDisplay-Regular.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-Regular.svg#SFProDisplay-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-Medium.eot');
+  src:
+    url('/fonts/SFProDisplay-Medium.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-Medium.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-Medium.woff') format('woff'),
+    url('/fonts/SFProDisplay-Medium.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-Medium.svg#SFProDisplay-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-UltralightItalic.eot');
+  src:
+    url('/fonts/SFProDisplay-UltralightItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-UltralightItalic.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-UltralightItalic.woff') format('woff'),
+    url('/fonts/SFProDisplay-UltralightItalic.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-UltralightItalic.svg#SFProDisplay-UltralightItalic') format('svg');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-ThinItalic.eot');
+  src:
+    url('/fonts/SFProDisplay-ThinItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-ThinItalic.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-ThinItalic.woff') format('woff'),
+    url('/fonts/SFProDisplay-ThinItalic.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-ThinItalic.svg#SFProDisplay-ThinItalic') format('svg');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('/fonts/SFProDisplay-SemiboldItalic.eot');
+  src:
+    url('/fonts/SFProDisplay-SemiboldItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/SFProDisplay-SemiboldItalic.woff2') format('woff2'),
+    url('/fonts/SFProDisplay-SemiboldItalic.woff') format('woff'),
+    url('/fonts/SFProDisplay-SemiboldItalic.ttf') format('truetype'),
+    url('/fonts/SFProDisplay-SemiboldItalic.svg#SFProDisplay-SemiboldItalic') format('svg');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/**** Define Color Scheme ******/
+:root {
+  --primary-text: #242634;
+  --primary-border: #ebeff2;
+  --button-border: #cdd3d8;
+  --background: #f0f0f1;
+  --secondary-background: #f8f8f8;
+  --active: #4353ff;
+  --secondary-border: #e2e6ea;
+  --button-light-background: #f7f9fb;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body,
+*,
+div,
+span {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--primary-text);
+  font-family: Tahoma, Helvetica, sans-serif;
+}
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+::placeholder {
+  color: var(--button-border);
+}
+/*** Arabic RTL *****/
+html[lang='ar_AE'],
+[lang='ar_AE'] body,
+[lang='ar_AE'] #app {
+  direction: rtl;
+}
+
+[lang='ar_AE'] body,
+[lang='ar_AE'] button,
+[lang='ar_AE'] * {
+  font-family: 'Noto Kufi Arabic', sans-serif;
+}
+
+.loading {
+  margin-left: -5px;
+  background: url(/src/assets/loader.svg) center center no-repeat;
+  background-size: 140px auto;
+  background-color: rgb(255 255 255 / 80%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.hide {
+  display: none;
+}
+
+/**** Language Selector / Switcher ******/
+.language-selector {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.language-selector .button-group {
+  direction: ltr;
+}
+
+/********** Buttons ******************/
+.button-group {
+  width: auto;
+  height: 36px;
+  display: flex;
+  gap: 4px;
+  padding: 4px 5px;
+  border-radius: 40px;
+  box-shadow: inset 0 0 2px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--button-light-background);
+}
+
+button {
+  cursor: pointer;
+  width: auto;
+  height: 28px;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 20px;
+  border-radius: 40px;
+  background-color: var(--button-light-background);
+  color: var(--active);
+  border: 0px;
+  font-size: 12px;
+  font-weight: 600;
+}
+button.primary {
+  background: none;
+  border: 1px solid var(--active);
+  color: var(--active);
+}
+button.primary:hover {
+  background-color: var(--active);
+  color: white;
+}
+
+.active {
+  background-color: var(--active);
+  color: white;
+}
+
+/***** Footer *******/
+.footer {
+  font-size: 12px;
+  background: #f7f9fb;
+  padding: 14px 20px;
+}

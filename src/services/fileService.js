@@ -46,5 +46,23 @@ export default {
       console.log(error)
       throw error
     }
+  },
+  async loginUser(username, password) {
+    /* let formData = new FormData()
+    formData.append('username', username)
+    formData.append('password', password)
+ */
+    try {
+      var res = await this.apiClient.post('/login', {
+        username: username,
+        password: password
+      })
+
+      return res.data
+    } catch (err) {
+      let error = 'Login Failed: ' + err
+      console.log(error)
+      throw error
+    }
   }
 }
