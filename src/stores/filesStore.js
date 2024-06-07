@@ -26,8 +26,30 @@ export const useFilesStore = defineStore({
       this.setLastSyncedDate(new Date())
       this.setFiles(files)
     },
-    async uploadFiles(payload) {},
-    async updateFileInfo(payload) {},
+    async uploadFiles(payload) {
+      try {
+        let res = await fileService.uploadFiles(payload)
+        return res
+      } catch (err) {
+        return err
+      }
+    },
+    async removeFile(payload) {
+      try {
+        let res = await fileService.removeFile(payload)
+        return res
+      } catch (err) {
+        return err
+      }
+    },
+    async updateFile(payload) {
+      try {
+        let res = await fileService.updateFile(payload)
+        return res
+      } catch (err) {
+        return err
+      }
+    },
     setFiles(payload) {
       this._files = payload
     },

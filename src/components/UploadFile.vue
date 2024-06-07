@@ -1,5 +1,7 @@
 <script>
 import { STATUS, FILES_RETRIEVAL_MODE } from '@/Enums.js'
+import ListFiles from './ListFiles.vue'
+
 export default {
   data() {
     return {
@@ -8,7 +10,6 @@ export default {
 
       /*** Local State *****/
       filesRetrievalMode: FILES_RETRIEVAL_MODE.RECENT,
-      uploadStatus: STATUS.IDLE,
       statusMessage: '',
       selectedFiles: [],
       inputFiles: null,
@@ -25,7 +26,12 @@ export default {
       /**** CONSTANTS *****/
     }
   },
-  props: {},
+  components: {
+    ListFiles
+  },
+  props: {
+    uploadStatus: String
+  },
   computed: {
     // Generate a textual list of the allowed Item Types from allowedTypes
     allowedFileTypes() {
@@ -39,14 +45,29 @@ export default {
       }
       // Convert to comma seperated string!
       return allowedArray.toString()
+    },
+    filesForListComponent() {
+      let finalFiles = []
+      for (let f in this.selectedFiles) {
+        let file = this.selectedFiles[f]
+        finalFiles.push({
+          id: f,
+          file_name: file.name,
+          original_file_name: file.name,
+          file_size: file.size,
+          file_type: file.type
+        })
+      }
+      return finalFiles
     }
   },
   methods: {
     uploadFiles() {
-      console.log('uplaod clicked')
+      console.log('upload started')
+      this.$emit('uploadFiles', this.selectedFiles)
     },
     dropHandler(ev) {
-      this.selectedFiles = []
+      //this.selectedFiles = []
       this.draggedOver = ''
       // Prevent default behavior (Prevent file from being opened)
       ev.preventDefault()
@@ -116,6 +137,20 @@ export default {
       console.log(this.$refs)
       var elem = this.$refs.fileButton
       elem.click()
+    },
+    submitUpload() {
+      // TODO: move this to the Submit button
+      this.uploadFiles()
+    },
+    removeFile(id) {
+      this.selectedFiles.splice(id, 1)
+      this.statusMessage =
+        '<span style="color: green">' + this.selectedFiles.length + ' files selected.' + '</span>'
+      /* this.selectedFiles.forEach((item, i) => {
+        if (String(i).trim() == String(id).trim()) {
+          this.selectedFiles.splice(i, 1)
+        }
+      }) */
     }
   },
   mounted() {}
@@ -126,12 +161,12 @@ export default {
   <div class="upload-container">
     <div class="body">
       <div class="files-container">
-        <div v-if="loadStatus == STATUS.SELECTED" class="loading">uploading...</div>
         <div
           class="file-uploader"
           :class="draggedOver"
           :ondrop="dropHandler"
           :ondragover="dragHandler"
+          :ondragleave="dragOutHandler"
           :ondragend="dragOutHandler"
           @click="simulateClickFileUpload"
         >
@@ -145,9 +180,21 @@ export default {
           />
         </div>
       </div>
+      <ListFiles
+        v-if="selectedFiles.length"
+        :files="filesForListComponent"
+        :loadStatus="uploadStatus"
+        :viewAllUploads="false"
+        :remove="true"
+        :update="false"
+        @removeFile="removeFile"
+      />
     </div>
   </div>
-  <div v-if="statusMessage" class="footer" v-html="statusMessage"></div>
+  <div v-if="statusMessage" class="footer">
+    <span class="statusMessage" v-html="statusMessage"></span>
+    <button class="submitUpload primary" @click="submitUpload">Submit</button>
+  </div>
 </template>
 
 <style scoped>
@@ -300,11 +347,15 @@ export default {
   border-radius: 24px;
   color: #a7a7a7;
   text-align: center;
+  cursor: pointer;
 }
 .uploader-active {
   border: 2px dashed var(--active);
 }
 .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .loader {
@@ -318,5 +369,7 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 9;
+}
+.submitUpload {
 }
 </style>

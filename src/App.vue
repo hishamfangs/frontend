@@ -13,20 +13,27 @@ export default {
   },
   data() {
     return {
+      // ENUMS
       SECTION: SECTION,
       STATUS: STATUS,
+
+      // Local State
       selectedSection: SECTION.RECENT, // Default Section
       files: [],
       filesStore: useFilesStore(),
       loadStatus: STATUS.IDLE,
+      uploadStatus: STATUS.IDLE,
       failedMessage: '',
       lastSyncedDate: new Date()
     }
   },
   methods: {
     // Change Sections from Upload a new File to Recent files.
-    switchSection(event) {
-      this.selectedSection = event.target.name
+    switchSection(section) {
+      this.selectedSection = section
+    },
+    switchSectionHandler(event) {
+      this.switchSection(event.target.name)
     },
 
     // Retrieve the files from the REST API
@@ -42,6 +49,36 @@ export default {
         this.loadStatus = STATUS.FAILED
       }
       this.files = this.filesStore.files
+    },
+
+    // Upload Files
+    async uploadFiles(files) {
+      try {
+        let res = await this.filesStore.uploadFiles(files)
+        this.uploadStatus = STATUS.SUCCESS
+      } catch (err) {
+        this.uploadStatus = STATUS.FAILED
+      }
+      this.switchSection(SECTION.RECENT)
+      await this.getFiles()
+    },
+    async removeFile(id) {
+      try {
+        let res = await this.filesStore.removeFile(id)
+        this.loadStatus = STATUS.SUCCESS
+      } catch (err) {
+        this.loadStatus = STATUS.FAILED
+      }
+      await this.getFiles()
+    },
+    async updateFile(id) {
+      try {
+        let res = await this.filesStore.updateFile(id)
+        this.loadStatus = STATUS.SUCCESS
+      } catch (err) {
+        this.loadStatus = STATUS.FAILED
+      }
+      await this.getFiles()
     }
   },
   async mounted() {
@@ -60,7 +97,7 @@ export default {
             class="new-upload"
             name="new-upload"
             :class="[selectedSection == SECTION?.NEW_UPLOAD ? 'active' : '']"
-            @click="switchSection"
+            @click="switchSectionHandler"
           >
             New Upload
           </button>
@@ -68,7 +105,7 @@ export default {
             class="recent"
             name="recent"
             :class="[selectedSection == SECTION?.RECENT ? 'active' : '']"
-            @click="switchSection"
+            @click="switchSectionHandler"
           >
             Recent
           </button>
@@ -78,14 +115,22 @@ export default {
         </div>
       </div>
       <div class="body">
-        <UploadFile v-if="selectedSection == SECTION?.NEW_UPLOAD" />
-        <ListFiles
-          v-else-if="selectedSection == SECTION?.RECENT"
-          :files="files"
-          :loadStatus="loadStatus"
-          :lastSyncedDate="lastSyncedDate"
-          @getFiles="getFiles"
-        />
+        <div :class="[this.selectedSection == SECTION.NEW_UPLOAD ? '' : 'hide']">
+          <UploadFile @uploadFiles="uploadFiles" :uploadStatus="uploadStatus" />
+        </div>
+        <div :class="[this.selectedSection == SECTION.RECENT ? '' : 'hide']">
+          <ListFiles
+            :files="files"
+            :loadStatus="loadStatus"
+            :lastSyncedDate="lastSyncedDate"
+            :viewAllUploads="true"
+            :remove="true"
+            :update="true"
+            @getFiles="getFiles"
+            @removeFile="removeFile"
+            @updateFile="updateFile"
+          />
+        </div>
       </div>
     </div>
   </main>
@@ -178,6 +223,16 @@ button {
   font-size: 12px;
   font-weight: 600;
 }
+button.primary {
+  background: none;
+  border: 1px solid var(--active);
+  color: var(--active);
+}
+button.primary:hover {
+  background-color: var(--active);
+  color: white;
+}
+
 .active {
   background-color: var(--active);
   color: white;
@@ -215,6 +270,9 @@ img.Icon-Settings {
   font-size: 12px;
   background: #f7f9fb;
   padding: 14px 20px;
+}
+.hide {
+  display: none;
 }
 
 @media screen and (max-width: 1024px) {

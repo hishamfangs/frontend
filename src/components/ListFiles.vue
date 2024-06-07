@@ -11,20 +11,27 @@ export default {
       filesRetrievalMode: FILES_RETRIEVAL_MODE.RECENT,
       syncedSeconds: 0,
       timerInterval: null,
+      shownMenu: null,
 
       /**** CONSTANTS *****/
       ICONS: {
         default: 'default.svg',
         'application/pdf': 'pdf.svg',
         'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'office.svg',
-        'image/jpeg': 'image.svg'
+        'image/jpeg': 'image.svg',
+        'image/gif': 'image.svg',
+        'image/svg+xml': 'image.svg',
+        'image/png': 'image.svg'
       }
     }
   },
   props: {
     files: Object,
     loadStatus: String,
-    lastSyncedDate: Date
+    lastSyncedDate: Date,
+    viewAllUploads: Boolean,
+    remove: Boolean,
+    update: Boolean
   },
   watch: {
     lastSyncedDate() {
@@ -72,6 +79,14 @@ export default {
         mode = this.filesRetrievalMode
       }
       this.$emit('getFiles', mode)
+    },
+    removeFile(id) {
+      this.hideMenu()
+      this.$emit('removeFile', id)
+    },
+    updateFile(id) {
+      this.hideMenu()
+      this.$emit('updateFile', id)
     },
     fillIcon(file) {
       let iconFilename = ''
@@ -125,6 +140,9 @@ export default {
     },
     runSyncTimer() {
       // Create timer that will run every 10 seconds to update the last Synced by seconds
+      if (!this.lastSyncedDate) {
+        return
+      }
       clearInterval(this.timerInterval)
       let calculateSeconds = () => {
         this.syncedSeconds =
@@ -134,10 +152,20 @@ export default {
       this.timerInterval = setInterval(() => {
         calculateSeconds()
       }, 1000 * 10)
+    },
+    showMenu(id) {
+      console.log(id)
+      this.shownMenu = id
+    },
+    hideMenu() {
+      this.shownMenu = null
     }
   },
   mounted() {
     this.runSyncTimer()
+    document.addEventListener('click', (event) => {
+      this.hideMenu(event)
+    })
   }
 }
 </script>
@@ -156,15 +184,25 @@ export default {
             </div>
           </div>
           <div class="tag">{{ fillFileSizeOrStatus(file) }}</div>
-          <div class="menu">:</div>
+          <div class="menu" @click.stop="showMenu(file.id)">
+            <img src="/icons/elipsis.svg" />
+            <ul class="drop-menu" :class="[this.shownMenu == file.id ? '' : 'hide']">
+              <li @click.stop="updateFile(file.id)" v-if="update === true">
+                <img src="/icons/edit.png" /><span>Update File</span>
+              </li>
+              <li @click.stop="removeFile(file.id)" v-if="remove === true">
+                <img src="/icons/remove.png" /><span>Remove File</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="view-all-container">
+      <div v-if="viewAllUploads !== false" class="view-all-container">
         <button class="view-all-uploads" @click="toggleGetFiles">{{ getFileslabel }}</button>
       </div>
     </div>
   </div>
-  <div class="footer">
+  <div class="footer" v-if="lastSyncedDate">
     <span
       ><i></i> Last Synced: {{ lastSynced }} ago
       <span class="refreshed-notice">(refreshed every 10 seconds / 1 minute)</span></span
@@ -273,5 +311,35 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 9;
+}
+.menu {
+  padding: 6px;
+  cursor: pointer;
+}
+.drop-menu {
+  position: absolute;
+  z-index: 8;
+  right: 20px;
+  background: white;
+  padding: 10px 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  font-size: 10px;
+  list-style: none;
+}
+.drop-menu > li {
+  padding: 2px 10px;
+}
+.drop-menu > li:hover {
+  background: var(--background);
+}
+.drop-menu > li > * {
+  vertical-align: middle;
+}
+.drop-menu > li > img {
+  width: auto;
+  height: 14px;
+  margin: 5px;
 }
 </style>
