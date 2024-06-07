@@ -158,12 +158,13 @@ button.border {
 .login-hint {
   text-align: center;
   margin: 20px;
-  font-size: 13px;
+  font-size: 14px;
   margin-top: 0;
 }
 .login-hint span {
-  font-weight: 500;
+  font-weight: 100;
   color: grey;
+  font-size: 16px;
 }
 .error_message {
   color: red;
@@ -178,5 +179,6 @@ button.border {
 .login-hint-container img {
   width: 100%;
   filter: hue-rotate(76deg) brightness(0.68) saturate(2.5);
+  margin-bottom: 10px;
 }
 </style>
