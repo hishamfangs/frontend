@@ -37,6 +37,9 @@ export default {
     },
     // Retrieve the files from the REST API
     async getFiles(mode) {
+      if (mode) {
+        this.filesStore.setFilesRetrievalMode(mode)
+      }
       this.loadStatus = STATUS.PENDING
       try {
         await this.filesStore.getFiles(mode)
@@ -134,6 +137,7 @@ export default {
             :remove="true"
             :update="true"
             :translate="filesStore.translate"
+            :filesRetrievalMode="filesStore.filesRetrievalMode"
             @getFiles="getFiles"
             @removeFile="removeFile"
             @updateFile="updateFile"

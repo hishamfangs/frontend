@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia'
 import fileService from '@/services/fileService'
 import translation from '@/translations'
+import { FILES_RETRIEVAL_MODE } from '@/Enums.js'
 
 export const useFilesStore = defineStore({
   id: 'filesStore',
@@ -10,7 +11,8 @@ export const useFilesStore = defineStore({
     _uploadedFiles: [],
     _lastSyncedDate: new Date(),
     _language: 'en_US',
-    _token: ''
+    _token: '',
+    _filesRetrievalMode: FILES_RETRIEVAL_MODE.RECENT
   }),
   getters: {
     files: (state) => {
@@ -27,6 +29,9 @@ export const useFilesStore = defineStore({
     },
     token: (state) => {
       return state._token
+    },
+    filesRetrievalMode: (state) => {
+      return state._filesRetrievalMode
     }
   },
   actions: {
@@ -80,6 +85,9 @@ export const useFilesStore = defineStore({
     },
     logout() {
       this.setToken('')
+    },
+    setFilesRetrievalMode(payload) {
+      this._filesRetrievalMode = payload
     },
     setFiles(payload) {
       this._files = payload

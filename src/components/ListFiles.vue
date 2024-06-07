@@ -8,7 +8,6 @@ export default {
       FILES_RETRIEVAL_MODE: FILES_RETRIEVAL_MODE,
 
       /*** Local State *****/
-      filesRetrievalMode: FILES_RETRIEVAL_MODE.RECENT,
       syncedSeconds: 0,
       timerInterval: null,
       shownMenu: null,
@@ -32,6 +31,7 @@ export default {
     viewAllUploads: Boolean,
     remove: Boolean,
     update: Boolean,
+    filesRetrievalMode: String,
     translate: Function
   },
   watch: {
@@ -68,12 +68,13 @@ export default {
   methods: {
     toggleGetFiles() {
       console.log('toggled')
+      let newMode = ''
       if (this.filesRetrievalMode == FILES_RETRIEVAL_MODE.RECENT) {
-        this.filesRetrievalMode = FILES_RETRIEVAL_MODE.ALL
+        newMode = FILES_RETRIEVAL_MODE.ALL
       } else {
-        this.filesRetrievalMode = FILES_RETRIEVAL_MODE.RECENT
+        newMode = FILES_RETRIEVAL_MODE.RECENT
       }
-      this.getFiles()
+      this.getFiles(newMode)
     },
     getFiles(mode) {
       if (!mode) {
