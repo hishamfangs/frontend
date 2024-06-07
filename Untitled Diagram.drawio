@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2024-06-07T02:03:19.652Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="GXrhzWaKu2A1FmZaQBwJ" version="24.4.13" type="github">
+<mxfile host="app.diagrams.net" modified="2024-06-07T05:39:51.054Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" etag="57O27ef67FJMSRcb9WTH" version="24.4.13" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1817" dy="1700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2577" dy="2066" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="FileManager.Vue&#xa;&#xa;" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="470" y="180" width="170" height="200" as="geometry">
+          <mxGeometry x="470" y="170" width="170" height="200" as="geometry">
             <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
@@ -126,7 +126,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="HFVeS3BLLz6tbZfoytvX-23" value="ENUMS.js&lt;br&gt;&lt;br&gt;&lt;div style=&quot;text-align: left; font-size: 9px;&quot;&gt;SECTION = {&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;NEW_UPLOAD&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;RECENT&lt;br&gt;}&lt;br&gt;&lt;br&gt;FILES_RETRIEVAL_MODE= {&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;RECENT,&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;ALL&lt;br&gt;}&lt;br&gt;&lt;br&gt;STATUS = {&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;IDLE&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;SELECTED,&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;PENDING,&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;SUCCESS,&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;FAILED&lt;br&gt;}&lt;br&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="960" y="127.93" width="180" height="226.13" as="geometry" />
+          <mxGeometry x="960" y="132.94" width="180" height="226.13" as="geometry" />
         </mxCell>
         <mxCell id="HFVeS3BLLz6tbZfoytvX-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.471;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="zkfFHV4jXpPFQw0GAbJ--7" target="zkfFHV4jXpPFQw0GAbJ--5">
           <mxGeometry relative="1" as="geometry">
@@ -160,8 +160,11 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="HFVeS3BLLz6tbZfoytvX-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.013;entryY=1.053;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HFVeS3BLLz6tbZfoytvX-21" target="zkfFHV4jXpPFQw0GAbJ--7">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="HFVeS3BLLz6tbZfoytvX-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.602;exitY=1.167;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="HFVeS3BLLz6tbZfoytvX-21" target="HFVeS3BLLz6tbZfoytvX-45">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="921.49" y="670" as="sourcePoint" />
+            <mxPoint x="485.0000000000002" y="670.3919999999998" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="HFVeS3BLLz6tbZfoytvX-37" value="files, loadStatus, viewAllUploads" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="HFVeS3BLLz6tbZfoytvX-36">
           <mxGeometry x="-0.1172" y="2" relative="1" as="geometry">
@@ -179,6 +182,15 @@
         </mxCell>
         <mxCell id="HFVeS3BLLz6tbZfoytvX-42" value="&lt;b&gt;translations.js&lt;/b&gt;&lt;br&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;const translations = {}&lt;/span&gt;&lt;/div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;u&gt;methods:&lt;/u&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;translate()&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="-164" y="340" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HFVeS3BLLz6tbZfoytvX-45" value="ListFiles.vue" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="730" y="720" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="HFVeS3BLLz6tbZfoytvX-46" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.message;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="570" y="650" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="HFVeS3BLLz6tbZfoytvX-48" value="&lt;span style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;use listFiles component&lt;/span&gt;&lt;div&gt;to show selected files&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="575" y="660" width="150" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
