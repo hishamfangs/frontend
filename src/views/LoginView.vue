@@ -1,6 +1,6 @@
 <template>
   <div class="login-wrapper">
-    <div class="login">
+    <div class="login" @keyup.enter="doLogin">
       <div v-if="loginStatus == STATUS.PENDING" class="loading">
         {{ filesStore.translate('loading') }}...
       </div>
@@ -60,7 +60,10 @@ export default {
     async doLogin() {
       try {
         this.loginStatus = STATUS.PENDING
-        await this.filesStore.loginUser(this.username, this.password)
+        let res = await this.filesStore.loginUser(this.username, this.password)
+        if (res.error) {
+          throw res.error
+        }
         this.loginStatus = STATUS.SUCCESS
         this.$router.push({ name: 'File Manager' })
       } catch (err) {

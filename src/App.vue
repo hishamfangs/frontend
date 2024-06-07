@@ -14,6 +14,10 @@ export default {
   methods: {
     setLanguage(lang) {
       this.filesStore.setLanguage(lang)
+    },
+    logout() {
+      this.filesStore.logout()
+      this.$router.push({ name: 'Login' })
     }
   },
   computed: {
@@ -26,12 +30,35 @@ export default {
 </script>
 
 <template>
-  <LanguageSelector
-    :language="language"
-    :translate="this.filesStore.translate"
-    @setLanguage="setLanguage"
-  />
+  <!-- Top Menu -->
+  <div class="top-menu">
+    <div class="spacer" v-if="filesStore.token"></div>
+    <LanguageSelector
+      :language="language"
+      :translate="this.filesStore.translate"
+      @setLanguage="setLanguage"
+    />
+    <button class="logout" v-if="filesStore.token" @click="logout">
+      {{ filesStore.translate('Logout') }}
+    </button>
+  </div>
+  <!-- Router View -->
   <router-view />
 </template>
 
-<style></style>
+<style>
+.top-menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+  padding: 0 40px;
+  justify-content: space-between;
+}
+.spacer {
+  width: 80px;
+}
+.logout {
+  cursor: pointer;
+}
+</style>

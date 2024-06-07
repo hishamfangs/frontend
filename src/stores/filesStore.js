@@ -68,15 +68,18 @@ export const useFilesStore = defineStore({
     async loginUser(username, password) {
       try {
         let res = await fileService.loginUser(username, password)
-        if (res) {
+        if (res && !res.error) {
           this.setToken(res.access_token)
         } else {
           this.setToken('')
         }
         return res
       } catch (err) {
-        return err
+        return { error: err }
       }
+    },
+    logout() {
+      this.setToken('')
     },
     setFiles(payload) {
       this._files = payload

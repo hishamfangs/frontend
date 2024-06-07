@@ -106,6 +106,10 @@ const translations = {
   'Incorrect Username or Password!': {
     ar_AE: 'اسم المستخدم أو كلمة المرور غير صحيحة!',
     en_US: 'Incorrect Username or Password!'
+  },
+  Logout: {
+    ar_AE: 'تسجيل خروج',
+    en_US: 'Logout'
   }
 }
 
