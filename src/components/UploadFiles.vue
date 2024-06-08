@@ -9,7 +9,6 @@ export default {
       STATUS: STATUS,
 
       /*** Local State *****/
-      filesRetrievalMode: FILES_RETRIEVAL_MODE.RECENT,
       statusMessage: '',
       selectedFiles: [],
       inputFiles: null,
